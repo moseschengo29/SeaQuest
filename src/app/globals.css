@@ -1,0 +1,137 @@
+@import url('https://api.fontshare.com/v2/css?f[]=switzer@1,2,3,4,5,6,7,8,9&display=swap');
+@import "tailwindcss";
+
+:root {
+  /* =========================
+     Typography
+  ========================= */
+  --font-switzer: 'Switzer', sans-serif;
+
+  /* =========================
+     Core Colors
+  ========================= */
+  --foreground-rgb: 255, 255, 255;
+
+  /* =========================
+     SeaQuest Brand Colors
+  ========================= */
+  --sq-primary: #013E96;    /* Primary Blue */
+  --sq-secondary: #CF5300;  /* Secondary Orange */
+
+  /* Extended Palette */
+  --sq-dark: #000F1E;       /* Deep Navy Background */
+  --sq-dark-soft: #010816;  /* Hero / Overlay Navy */
+  --sq-light: #E6F0FF;      /* Light UI accents */
+
+  /* Semantic Aliases (recommended usage) */
+  --color-brand: var(--sq-primary);
+  --color-accent: var(--sq-secondary);
+}
+
+
+
+/* Chrome, Safari, Edge, Opera */
+body::-webkit-scrollbar {
+  display: none;
+}
+body {
+  font-family: var(--font-switzer) !important;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: #fdfdf9;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  overflow-y: scroll; /* ensure scroll still works */
+}
+
+/* =========================
+   Custom SeaQuest Utilities
+========================= */
+@layer utilities {
+  /* Brand Colors */
+  .bg-sq-primary { background-color: var(--sq-primary); }
+  .text-sq-primary { color: var(--sq-primary); }
+  .border-sq-primary {border: var(--sq-primary);}
+
+  .bg-sq-secondary { background-color: var(--sq-secondary); }
+  .text-sq-secondary { color: var(--sq-secondary); }
+  .border-sq-secondary {border: var(--sq-secondary);}
+
+
+  /* Semantic Usage */
+  .bg-brand { background-color: var(--color-brand); }
+  .text-brand { color: var(--color-brand); }
+
+  .bg-accent { background-color: var(--color-accent); }
+  .text-accent { color: var(--color-accent); }
+
+  /* Brand Gradient */
+  .text-brand-gradient {
+    background: linear-gradient(
+      to right,
+      var(--sq-primary),
+      var(--sq-secondary)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+/* =========================
+   Cursor Styling
+========================= */
+@media (hover: hover) and (pointer: fine) {
+  body {
+    cursor: none;
+  }
+  a, button, [role="button"] {
+    cursor: none;
+  }
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+
+/* =========================
+   Motion
+========================= */
+@keyframes underwater {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(10px, -15px); }
+  50% { transform: translate(-5px, -25px); }
+  75% { transform: translate(-12px, -10px); }
+}
+
+/* app/globals.css */
+
+@layer utilities {
+  .stroke-text {
+    /* The white outline */
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.8);
+    color: transparent; 
+  }
+  
+  /* Optional: Thicker stroke for mobile if needed */
+  .stroke-text-thick {
+    -webkit-text-stroke: 2px rgba(255, 255, 255, 1);
+    color: transparent;
+  }
+  
+    /* 1. Define the animation keyframes */
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+  
+    /* 2. Create the utility class */
+    .animate-marquee {
+      animation: marquee 20s linear infinite;
+    }
+  }
