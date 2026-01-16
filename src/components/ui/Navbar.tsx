@@ -80,7 +80,7 @@ const Navbar = forwardRef<HTMLDivElement, NavbarProps>(({ isScrolled, fontClass,
         <div className="flex items-center gap-4 px-0">
            {isScrolled && (
              <span className="hidden md:block text-[10px] text-white uppercase tracking-widest font-bold animate-pulse">
-               ● Live: Watamu
+               ● Live: Malindi
              </span>
            )}
            

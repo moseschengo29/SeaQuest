@@ -74,20 +74,30 @@ export default function ClientLayout({
         onUpdate: (self) => setIsScrolled(self.direction === 1 || self.scroll() > 50),
       });
 
-      // GLOBAL MAGNETIC BUTTONS
-      // We attach this to document so it works for buttons in children pages too
-      const buttons = document.querySelectorAll(".magnetic-btn");
-      buttons.forEach((btn) => {
-        btn.addEventListener("mousemove", (e: any) => {
-          const rect = btn.getBoundingClientRect();
-          const x = e.clientX - rect.left - rect.width / 2;
-          const y = e.clientY - rect.top - rect.height / 2;
-          gsap.to(btn, { x: x * 0.3, y: y * 0.3, duration: 0.3 });
+
+        const buttons = document.querySelectorAll<HTMLElement>(".magnetic-btn");
+
+        buttons.forEach((btn) => {
+        // 2. Specify 'e' as a MouseEvent
+        btn.addEventListener("mousemove", (e: MouseEvent) => {
+            const rect = btn.getBoundingClientRect();
+            
+            // Now TypeScript knows exactly what e.clientX and e.clientY are
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            gsap.to(btn, { 
+            x: x * 0.3, 
+            y: y * 0.3, 
+            duration: 0.3,
+            ease: "power2.out" 
+            });
         });
+
         btn.addEventListener("mouseleave", () => {
-          gsap.to(btn, { x: 0, y: 0, duration: 0.3 });
+            gsap.to(btn, { x: 0, y: 0, duration: 0.3, ease: "power2.out" });
         });
-      });
+        });
 
     }, container);
 

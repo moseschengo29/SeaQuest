@@ -12,7 +12,7 @@ export default function Gallery({ fontClass }: { fontClass: string }) {
       {/* Row 1 */}
       <div className="flex w-[200%] marquee-row-1 mb-8">
         {[...GALLERY_IMAGES, ...GALLERY_IMAGES].map((img, i) => (
-          <div key={i} className="w-[20vw] h-[30vh] shrink-0 px-2">
+          <div key={i} className="w-[40vw] md:w-[20vw] h-[30vh] shrink-0 px-2">
             <img src={img} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" alt="Gallery" />
           </div>
         ))}
@@ -21,7 +21,7 @@ export default function Gallery({ fontClass }: { fontClass: string }) {
       {/* Row 2 (Reverse) */}
       <div className="flex w-[200%] marquee-row-2">
          {[...GALLERY_IMAGES, ...GALLERY_IMAGES].reverse().map((img, i) => (
-          <div key={i} className="w-[20vw] h-[30vh] shrink-0 px-2">
+          <div key={i} className="w-[40vw] md:w-[20vw] h-[30vh] shrink-0 px-2">
             <img src={img} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" alt="Gallery" />
           </div>
         ))}

@@ -56,7 +56,7 @@ export default function ContactPage() {
 
           <div className="contact-fade mt-4 space-y-10">
             <p className="text-gray-400 text-xl max-w-md leading-relaxed">
-              Whether you're looking to book a deep-sea hunt or secure a fresh haul of premium lobster and crab, our comms are open.
+              Whether you&apos;re looking to book a deep-sea hunt or secure a fresh haul of premium lobster and crab, our comms are open.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

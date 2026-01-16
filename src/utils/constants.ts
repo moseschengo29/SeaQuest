@@ -44,7 +44,6 @@ export const GALLERY_IMAGES = [
 
 export const TARGET_SPECIES = [
   { name: 'Lobsters', img: lobsterImg },
-  { name: 'Crabs', img: crabImg },
   { name: 'Deep Sea Crabs', img: crabImg },
 ];
 

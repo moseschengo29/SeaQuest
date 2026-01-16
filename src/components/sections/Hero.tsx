@@ -1,7 +1,12 @@
 import React from 'react';
 
-export default function Hero({ fontClass, onEnter, onLeave }: { fontClass: string, onEnter: any, onLeave: any }) {
-  return (
+interface HeroProps {
+    fontClass: string;
+    onEnter: () => void; // Explicitly defines a function that returns nothing
+    onLeave: () => void;
+  }
+
+  export default function Hero({ fontClass, onEnter, onLeave }: HeroProps) {  return (
     <header className="relative h-screen w-full flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-black/40 z-10" />

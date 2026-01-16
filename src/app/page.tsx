@@ -21,73 +21,13 @@ import Preloader from "@/src/components/ui/PreLoader";
 
 const oswald = Oswald({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
-export default function Home() {
+export default function Page() {
   const container = useRef<HTMLDivElement>(null);
 
   // Note: Most global animations (Cursor, Navbar) are now in ClientLayout.
   // We only keep PAGE SPECIFIC animations here.
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // --- A. PRELOADER & HERO REVEAL SEQUENCE ---
-      const tl = gsap.timeline({
-        onComplete: () => ScrollTrigger.refresh()
-      });
-
-      const depthObj = { value: 0 };
-      
-      tl.to(depthObj, {
-        value: 3450,
-        duration: 2.5,
-        ease: "expo.inOut",
-        onUpdate: () => {
-          const counter = document.querySelector(".depth-counter");
-          if (counter) counter.textContent = Math.floor(depthObj.value).toString();
-        }
-      })
-      .to(".preloader-content", {
-        opacity: 0,
-        y: -50,
-        duration: 0.5
-      }, "-=0.5")
-      .to(".preloader", {
-        yPercent: -100,
-        duration: 1,
-        ease: "power4.inOut",
-      })
-      // --- NEW: Hero Text Reveal ---
-      .to(".hero-char", {
-        y: 0, // Moves back to original position
-        stagger: 0.05,
-        duration: 1,
-        ease: "power4.out"
-      })
-      .to(".hero-sub", {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        stagger: 0.2,
-        ease: "power2.out"
-      }, "-=0.8");
-
-
-      // --- B. SCROLL REVEALS (For Intro Section) ---
-      // This finds anything with class 'reveal-text' and fades it up on scroll
-      const reveals = document.querySelectorAll(".reveal-text");
-      reveals.forEach((text) => {
-        gsap.fromTo(text, 
-          { y: 50, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: text,
-              start: "top 85%", // Starts when top of element hits 85% of viewport height
-            }
-          }
-        );
-      });
       
       // Depth Meter Logic (Page specific scroll calculation)
       ScrollTrigger.create({
@@ -121,8 +61,10 @@ export default function Home() {
       }
 
       // Fleet Stacking
-      const cards = document.querySelectorAll(".fleet-card"); 
-      cards.forEach((card: any) => {
+      const cards = document.querySelectorAll<HTMLElement>(".fleet-card"); 
+
+      cards.forEach((card) => {
+        // TypeScript now knows 'card' is an HTMLElement
         ScrollTrigger.create({
           trigger: card,
           start: "top top", 

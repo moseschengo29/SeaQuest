@@ -44,7 +44,7 @@ export default function Fleet({ fontClass }: { fontClass: string }) {
                </h2>
                
                <p className="text-xl text-sq-secondary tracking-widest uppercase mb-4">
-                  FV MASANG &bull; {view.subtitle}
+                  FV MASANG &bull; {view.title}
                </p>
                
                <p className="text-gray-400 max-w-sm text-sm leading-relaxed mb-8">

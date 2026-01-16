@@ -1,10 +1,14 @@
 "use client";
 
 import React from "react";
-import gsap from "gsap";
 
-export default function Footer({ fontClass, onEnter, onLeave }: { fontClass: string, onEnter: any, onLeave: any }) {
-  
+interface FooterProps {
+    fontClass: string;
+    onEnter: () => void; // Explicitly defines a function that returns nothing
+    onLeave: () => void;
+  }
+
+  export default function Footer({ fontClass, onEnter, onLeave }: FooterProps) {  
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };

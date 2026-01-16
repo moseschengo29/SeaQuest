@@ -6,8 +6,7 @@ const Cursor = forwardRef<HTMLDivElement>((props, ref) => {
   const prevPos = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const moveBoat = (e: MouseEvent) => {
+    const moveBoat = (e: MouseEvent) => {
         const dx = e.clientX - prevPos.current.x;
         const dy = e.clientY - prevPos.current.y;
         
@@ -22,6 +21,8 @@ const Cursor = forwardRef<HTMLDivElement>((props, ref) => {
         }
         prevPos.current = { x: e.clientX, y: e.clientY };
       };
+      
+    const ctx = gsap.context(() => {
 
       window.addEventListener("mousemove", moveBoat);
     });

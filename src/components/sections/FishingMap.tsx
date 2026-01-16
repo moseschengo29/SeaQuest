@@ -1,8 +1,18 @@
 import React, { useState } from 'react';
 import { FISHING_SPOTS } from '@/src/utils/constants';
 
+interface FishingSpot {
+    id: string | number;
+    name: string;
+    depth: string; // Changed from number to string to match your data
+    x: number;     // Added to match your data
+    y: number;     // Added to match your data
+    desc: string;
+    fish: string;  // Changed from string[] to string to match your data
+}
+
 export default function FishingMap({ fontClass }: { fontClass: string }) {
-  const [activeSpot, setActiveSpot] = useState<any>(null);
+    const [activeSpot, setActiveSpot] = useState<FishingSpot | null>(null);
 
   return (
     <section id="grounds" className="py-32 bg-[#03122c] relative overflow-hidden">
@@ -53,7 +63,7 @@ export default function FishingMap({ fontClass }: { fontClass: string }) {
                       <div className="space-y-2 text-xs font-mono text-cyan-300">
                          <p><span className="text-gray-500">DEPTH:</span> {activeSpot.depth}</p>
                          <p><span className="text-gray-500">TARGET:</span> {activeSpot.fish}</p>
-                         <p className="text-gray-400 mt-2 leading-relaxed italic border-l-2 border-cyan-800 pl-2">"{activeSpot.desc}"</p>
+                         <p className="text-gray-400 mt-2 leading-relaxed italic border-l-2 border-cyan-800 pl-2">&quot;{activeSpot.desc}&quot;</p>
                       </div>
                    </>
                 )}
