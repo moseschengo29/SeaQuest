@@ -1,9 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export', // This creates an 'out' folder during build
+  output: 'export',
   images: {
-    unoptimized: true, // Required for static export
+    unoptimized: true, 
   },
+  // Ensure trailing slashes are handled for Apache servers
+  trailingSlash: true, 
 };
 
 export default nextConfig;
