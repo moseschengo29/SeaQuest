@@ -63,7 +63,7 @@ export default function ContactPage() {
               <div className="space-y-6">
                 <div>
                   <p className="text-sq-secondary text-[10px] font-bold uppercase tracking-[0.3em] mb-2">Main Base</p>
-                  <p className="text-lg font-bold uppercase">Post Bank, Moi Avenue<br/>Mombasa, Kenya</p>
+                  <p className="text-lg font-bold uppercase">Post Bank, Moi Avenue<br/>Mombasa, Kenya.</p>
                 </div>
                 <div>
                   <p className="text-sq-secondary text-[10px] font-bold uppercase tracking-[0.3em] mb-2">VHF Channel</p>
