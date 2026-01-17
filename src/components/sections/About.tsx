@@ -6,12 +6,12 @@ export default function About({ fontClass }: { fontClass: string }) {
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         <div>
           <h2 className={`reveal-text text-5xl md:text-7xl font-bold uppercase leading-none ${fontClass} mb-8`}>
-            From <span className="text-sq-secondary">The Deep.</span><br/> Delivered with Precision.
+            From <span className="text-sq-secondary">The Deep.</span><br/> Delivered with Precision...
           </h2>
         </div>
         <div>
           <p className="reveal-text text-xl text-gray-400 leading-relaxed font-light mb-8">
-          Operating along the rich waters of the Kenyan coastline, SeaQuest specializes in the sustainable harvest of deep-sea lobsters and crabs. Our crews navigate offshore depths with precision, combining local expertise and modern deep-sea techniques to deliver premium seafood while respecting the ocean that sustains us.
+          Operating along the rich waters of the Kenyan coastline, SeaQuest Resources specializes in the sustainable harvest of deep-sea crabs and lobsters. Our crew navigate offshore depths with precision, combining local expertise and modern deep-sea techniques to deliver premium seafood while respecting the ocean that sustains us.
           </p>
           <div className="grid grid-cols-2 gap-8 border-t border-gray-800 pt-8">
             <div className="reveal-text">

@@ -14,7 +14,7 @@ interface FooterProps {
   };
 
   return (
-    <footer className="bg-sq-secondary text-black py-24 px-6 relative overflow-hidden">
+    <footer className="bg-[#082c69] text-white py-24 px-6 relative overflow-hidden">
       {/* Background Decor: Technical Grid & Radar Sweep */}
       <div className="absolute inset-0 opacity-10 pointer-events-none" 
            style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '50px 50px' }} />
@@ -82,8 +82,8 @@ interface FooterProps {
                 className="group flex flex-col items-center md:items-end"
              >
                 <span className="text-[10px] font-bold uppercase tracking-widest mb-2 group-hover:-translate-y-2 transition-transform">Back to Surface</span>
-                <div className="w-8 h-12 border-2 border-black rounded-full relative overflow-hidden">
-                   <div className="absolute top-2 left-1/2 -translate-x-1/2 w-1 h-2 bg-black animate-bounce" />
+                <div className="w-8 h-12 border-2 border-[#CF5300] rounded-full relative overflow-hidden">
+                   <div className="absolute top-2 left-1/2 -translate-x-1/2 w-1 h-2 bg-sq-secondary animate-bounce" />
                 </div>
              </button>
           </div>

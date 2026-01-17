@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Oswald } from "next/font/google";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -21,13 +21,72 @@ import Preloader from "@/src/components/ui/PreLoader";
 
 const oswald = Oswald({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
-export default function Page() {
+export default function Home() {
   const container = useRef<HTMLDivElement>(null);
 
   // Note: Most global animations (Cursor, Navbar) are now in ClientLayout.
   // We only keep PAGE SPECIFIC animations here.
+  const [isFirstVisit, setIsFirstVisit] = useState(true);
+
   useEffect(() => {
+    const hasVisited = sessionStorage.getItem("seaquest_visited");
+    if (hasVisited) {
+      setIsFirstVisit(false);
+    }
+
     const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        onComplete: () => ScrollTrigger.refresh()
+      });
+
+      if (!hasVisited) {
+        // --- 1. PRELOADER SEQUENCE ---
+        const depthObj = { value: 0 };
+        
+        tl.to(depthObj, {
+          value: 3450,
+          duration: 3, // Slightly longer for a smoother count
+          ease: "expo.inOut",
+          onUpdate: () => {
+            // Use a direct query here to ensure we find the element
+            const counter = document.querySelector(".depth-counter");
+            if (counter) {
+              counter.textContent = Math.floor(depthObj.value).toString();
+            }
+          }
+        })
+        .to(".preloader-content", { 
+          opacity: 0, 
+          y: -50, 
+          duration: 0.5 
+        }, "-=0.5")
+        .to(".preloader", {
+          yPercent: -100,
+          duration: 1.2,
+          ease: "power4.inOut",
+          onComplete: () => {
+            sessionStorage.setItem("seaquest_visited", "true");
+          }
+        });
+      } else {
+        // --- 2. SKIP PRELOADER ---
+        tl.set(".preloader", { yPercent: -100, visibility: "hidden" });
+      }
+
+      // --- 3. HERO REVEAL (CLEANED UP - REMOVED DUPLICATE) ---
+      tl.to(".hero-char", {
+        y: 0,
+        stagger: 0.05,
+        duration: 1,
+        ease: "power4.out"
+      }, ">-0.5") // Starts slightly before the preloader finishes sliding up
+      .to(".hero-sub", {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power2.out"
+      }, "-=0.8");
       
       // Depth Meter Logic (Page specific scroll calculation)
       ScrollTrigger.create({
@@ -61,19 +120,20 @@ export default function Page() {
       }
 
       // Fleet Stacking
-      const cards = document.querySelectorAll<HTMLElement>(".fleet-card"); 
+      // 1. Tell querySelectorAll to return a list of HTMLElements
+        const cards = document.querySelectorAll<HTMLElement>(".fleet-card"); 
 
-      cards.forEach((card) => {
-        // TypeScript now knows 'card' is an HTMLElement
-        ScrollTrigger.create({
-          trigger: card,
-          start: "top top", 
-          pin: true, 
-          pinSpacing: false, 
-          end: "bottom top",
-          scrub: true,
+        cards.forEach((card) => {
+          // TypeScript now knows 'card' is an HTMLElement, no 'any' needed
+          ScrollTrigger.create({
+            trigger: card,
+            start: "top top", 
+            pin: true, 
+            pinSpacing: false, 
+            end: "bottom top",
+            scrub: true,
+          });
         });
-      });
 
       // Draggable Reviews
       const reviewContainer = document.querySelector(".review-track") as HTMLElement;

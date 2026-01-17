@@ -18,7 +18,7 @@ interface HeroProps {
       </div>
 
       <div className="hero-content relative z-20 text-center w-full px-4 flex flex-col items-center">
-        <p className="hero-sub text-sq-primary tracking-[0.5em] text-xs uppercase mb-6 font-bold opacity-0 translate-y-4">
+        <p className="hero-sub text-cyan-500 tracking-[0.5em] text-xs uppercase mb-6 font-bold opacity-0 translate-y-4">
             Kenyan Coast &bull; Est. 2012
         </p>
         
@@ -37,8 +37,8 @@ interface HeroProps {
         {/* --- 2. HUNTERS --- */}
         {/* FIX: Added 'px-2' here as well */}
         <div className="overflow-hidden py-4 -my-4 px-2">
-            <h1 className={`text-[13vw] leading-[0.85] font-bold uppercase tracking-tighter text-transparent stroke-text ${fontClass}`}>
-            {"HUNTERS".split("").map((char, i) => (
+            <h1 className={`text-[6vw] leading-[0.85] font-bold uppercase tracking-tighter text-transparent stroke-text ${fontClass}`}>
+            {"LOBSTERS & CRABS".split("").map((char, i) => (
                 <span key={i} className="hero-char inline-block translate-y-[120%] will-change-transform">
                     {char === " " ? "\u00A0" : char}
                 </span>
