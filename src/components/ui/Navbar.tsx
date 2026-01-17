@@ -14,9 +14,8 @@ interface NavbarProps {
   onLeave: () => void;
 }
 
-const Navbar = forwardRef<HTMLDivElement, NavbarProps>(({ isScrolled, fontClass, onEnter, onLeave }, ref) => {
+const Navbar = forwardRef<HTMLDivElement, NavbarProps>(({ isScrolled, onEnter, onLeave }, ref) => {
   const pathname = usePathname();
-  const router = useRouter();
 
   const handleScroll = (e: React.MouseEvent, id: string) => {
     // 1. If we are NOT on the home page, let the Link component handle the navigation

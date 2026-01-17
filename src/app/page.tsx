@@ -23,69 +23,66 @@ const oswald = Oswald({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
 export default function Home() {
   const container = useRef<HTMLDivElement>(null);
+  const preloaderDone = useRef(false);
 
-  // Note: Most global animations (Cursor, Navbar) are now in ClientLayout.
-  // We only keep PAGE SPECIFIC animations here.
-  const [isFirstVisit, setIsFirstVisit] = useState(true);
+
 
   useEffect(() => {
+    
     const hasVisited = sessionStorage.getItem("seaquest_visited");
-    if (hasVisited) {
-      setIsFirstVisit(false);
-    }
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
-        onComplete: () => ScrollTrigger.refresh()
+        onComplete: () => ScrollTrigger.refresh(),
       });
-
+  
       if (!hasVisited) {
-        // --- 1. PRELOADER SEQUENCE ---
         const depthObj = { value: 0 };
-        
+  
         tl.to(depthObj, {
           value: 3450,
-          duration: 3, // Slightly longer for a smoother count
+          duration: 3,
           ease: "expo.inOut",
           onUpdate: () => {
-            // Use a direct query here to ensure we find the element
             const counter = document.querySelector(".depth-counter");
             if (counter) {
               counter.textContent = Math.floor(depthObj.value).toString();
             }
-          }
+          },
         })
-        .to(".preloader-content", { 
-          opacity: 0, 
-          y: -50, 
-          duration: 0.5 
-        }, "-=0.5")
-        .to(".preloader", {
-          yPercent: -100,
-          duration: 1.2,
-          ease: "power4.inOut",
-          onComplete: () => {
-            sessionStorage.setItem("seaquest_visited", "true");
-          }
-        });
+          .to(".preloader-content", {
+            opacity: 0,
+            y: -50,
+            duration: 0.5,
+          }, "-=0.5")
+          .to(".preloader", {
+            yPercent: -100,
+            duration: 1.2,
+            ease: "power4.inOut",
+            onComplete: () => {
+              sessionStorage.setItem("seaquest_visited", "true");
+              preloaderDone.current = true;
+            },
+          });
+          
       } else {
-        // --- 2. SKIP PRELOADER ---
+        preloaderDone.current = true;
         tl.set(".preloader", { yPercent: -100, visibility: "hidden" });
       }
-
-      // --- 3. HERO REVEAL (CLEANED UP - REMOVED DUPLICATE) ---
+      
+  
       tl.to(".hero-char", {
         y: 0,
         stagger: 0.05,
         duration: 1,
-        ease: "power4.out"
-      }, ">-0.5") // Starts slightly before the preloader finishes sliding up
+        ease: "power4.out",
+      }, ">-0.5")
       .to(".hero-sub", {
         opacity: 1,
         y: 0,
         duration: 1,
         stagger: 0.2,
-        ease: "power2.out"
+        ease: "power2.out",
       }, "-=0.8");
       
       // Depth Meter Logic (Page specific scroll calculation)
@@ -93,13 +90,22 @@ export default function Home() {
         start: "top top",
         end: "bottom bottom",
         onUpdate: (self) => {
-          const depth = Math.floor(self.progress * 4000);
+          if (!preloaderDone.current) return;
+      
+          const depth = 3450 + Math.floor(self.progress * 550);
           const depthLabel = document.querySelector(".scroll-depth-label");
           const depthBar = document.querySelector(".scroll-depth-bar");
+      
           if (depthLabel) depthLabel.textContent = `${depth}m`;
-          if (depthBar) gsap.to(depthBar, { height: `${self.progress * 100}%`, duration: 0.1 });
-        }
+          if (depthBar) {
+            gsap.to(depthBar, {
+              height: `${self.progress * 100}%`,
+              duration: 0.1,
+            });
+          }
+        },
       });
+      
 
       // Horizontal Scroll (Target Species)
       const race = document.querySelector(".race-wrapper");
